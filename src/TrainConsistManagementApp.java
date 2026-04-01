@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -8,6 +9,16 @@ import java.util.Map;
 import java.util.Set;
 
 public class TrainConsistManagementApp {
+
+    static class Bogie {
+        String name;
+        int capacity;
+
+        Bogie(String name, int capacity) {
+            this.name = name;
+            this.capacity = capacity;
+        }
+    }
 
     public static void main(String[] args) {
 
@@ -140,5 +151,31 @@ public class TrainConsistManagementApp {
         }
 
         System.out.println("\nUC6 bogie-capacity mapping completed...");
+
+        // UC7 - Sort Bogies by Capacity (Comparator)
+        System.out.println("\n========================================");
+        System.out.println(" UC7 - Sort Bogies by Capacity (Comparator) ");
+        System.out.println("========================================\n");
+
+        List<Bogie> bogieList = new ArrayList<>();
+
+        bogieList.add(new Bogie("Sleeper", 72));
+        bogieList.add(new Bogie("AC Chair", 56));
+        bogieList.add(new Bogie("First Class", 24));
+        bogieList.add(new Bogie("General", 90));
+
+        System.out.println("Before Sorting:");
+        for (Bogie b : bogieList) {
+            System.out.println(b.name + " -> " + b.capacity);
+        }
+
+        Collections.sort(bogieList, (b1, b2) -> b1.capacity - b2.capacity);
+
+        System.out.println("\nAfter Sorting by Capacity:");
+        for (Bogie b : bogieList) {
+            System.out.println(b.name + " -> " + b.capacity);
+        }
+
+        System.out.println("\nUC7 sorting completed...");
     }
 }
