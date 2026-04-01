@@ -1,17 +1,31 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
 
+        // UC1 - Initialize Train and Display Consist Summary
         System.out.println("========================================");
+        System.out.println("   === Train Consist Management App ===");
+        System.out.println("========================================\n");
+
+        List<String> trainConsist = new ArrayList<>();
+
+        System.out.println("Train initialized successfully...");
+        System.out.println("Initial Bogie Count : " + trainConsist.size());
+        System.out.println("Current Train Consist : " + trainConsist);
+        System.out.println("\nSystem ready for operations...");
+
+        // UC2 - Add Passenger Bogies to Train
+        System.out.println("\n========================================");
         System.out.println(" UC2 - Add Passenger Bogies to Train ");
         System.out.println("========================================\n");
 
         List<String> passengerBogies = new ArrayList<>();
 
-        // CREATE (Add bogies)
         passengerBogies.add("Sleeper");
         passengerBogies.add("AC Chair");
         passengerBogies.add("First Class");
@@ -19,13 +33,11 @@ public class TrainConsistManagementApp {
         System.out.println("After Adding Bogies:");
         System.out.println("Passenger Bogies : " + passengerBogies);
 
-        // DELETE (Remove bogie)
         passengerBogies.remove("AC Chair");
 
         System.out.println("\nAfter Removing 'AC Chair':");
         System.out.println("Passenger Bogies : " + passengerBogies);
 
-        // READ (Check existence)
         System.out.println("\nChecking if 'Sleeper' exists:");
         System.out.println("Contains Sleeper? : " + passengerBogies.contains("Sleeper"));
 
@@ -33,5 +45,27 @@ public class TrainConsistManagementApp {
         System.out.println(passengerBogies);
 
         System.out.println("\nUC2 operations completed successfully...");
+
+        // UC3 - Track Unique Bogie IDs
+        System.out.println("\n========================================");
+        System.out.println(" UC3 - Track Unique Bogie IDs ");
+        System.out.println("========================================\n");
+
+        Set<String> bogies = new HashSet<>();
+
+        bogies.add("B6101");
+        bogies.add("B6102");
+        bogies.add("B6103");
+        bogies.add("B6104");
+        bogies.add("B6101"); // Duplicate entry
+        bogies.add("B6102"); // Duplicate entry
+
+        System.out.println("Bogie IDs After Insertion:");
+        System.out.println(bogies);
+
+        System.out.println("\nNote:");
+        System.out.println("Duplicates are automatically ignored by HashSet.");
+
+        System.out.println("\nUC3 uniqueness validation completed...");
     }
 }
