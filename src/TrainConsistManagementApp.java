@@ -210,5 +210,36 @@ public class TrainConsistManagementApp {
         }
 
         System.out.println("\nUC8 filtering completed...");
+
+        // UC9 - Group Bogies by Type
+        System.out.println("\n========================================");
+        System.out.println(" UC9 - Group Bogies by Type ");
+        System.out.println("========================================\n");
+
+        List<Bogie> uc9Bogies = new ArrayList<>();
+
+        uc9Bogies.add(new Bogie("Sleeper", 72));
+        uc9Bogies.add(new Bogie("AC Chair", 56));
+        uc9Bogies.add(new Bogie("First Class", 24));
+        uc9Bogies.add(new Bogie("Sleeper", 70));
+        uc9Bogies.add(new Bogie("AC Chair", 60));
+
+        System.out.println("All Bogies:");
+        for (Bogie b : uc9Bogies) {
+            System.out.println(b.name + " -> " + b.capacity);
+        }
+
+        Map<String, List<Bogie>> groupedBogies = uc9Bogies.stream()
+                .collect(Collectors.groupingBy(b -> b.name));
+
+        System.out.println("\nGrouped Bogies:");
+        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
+            System.out.println("\nBogie Type: " + entry.getKey());
+            for (Bogie b : entry.getValue()) {
+                System.out.println("  Capacity -> " + b.capacity);
+            }
+        }
+
+        System.out.println("\nUC9 grouping completed...");
     }
 }
