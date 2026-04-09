@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class TrainConsistManagementApp {
 
@@ -18,6 +19,12 @@ public class TrainConsistManagementApp {
             this.name = name;
             this.capacity = capacity;
         }
+    }
+
+    public static List<Bogie> filterBogiesByCapacity(List<Bogie> bogies, int threshold) {
+        return bogies.stream()
+                .filter(b -> b.capacity > threshold)
+                .collect(Collectors.toList());
     }
 
     public static void main(String[] args) {
@@ -177,5 +184,31 @@ public class TrainConsistManagementApp {
         }
 
         System.out.println("\nUC7 sorting completed...");
+
+        // UC8 - Filter Passenger Bogies Using Streams
+        System.out.println("\n========================================");
+        System.out.println(" UC8 - Filter Passenger Bogies Using Streams ");
+        System.out.println("========================================\n");
+
+        List<Bogie> uc8Bogies = new ArrayList<>();
+
+        uc8Bogies.add(new Bogie("Sleeper", 72));
+        uc8Bogies.add(new Bogie("AC Chair", 56));
+        uc8Bogies.add(new Bogie("First Class", 24));
+        uc8Bogies.add(new Bogie("General", 90));
+
+        System.out.println("All Bogies:");
+        for (Bogie b : uc8Bogies) {
+            System.out.println(b.name + " -> " + b.capacity);
+        }
+
+        List<Bogie> filtered = filterBogiesByCapacity(uc8Bogies, 60);
+
+        System.out.println("\nFiltered Bogies (Capacity > 60):");
+        for (Bogie b : filtered) {
+            System.out.println(b.name + " -> " + b.capacity);
+        }
+
+        System.out.println("\nUC8 filtering completed...");
     }
 }
