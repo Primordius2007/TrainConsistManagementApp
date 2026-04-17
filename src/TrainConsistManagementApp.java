@@ -367,5 +367,32 @@ public class TrainConsistManagementApp {
         System.out.println("Stream Execution Time (ns): " + (streamEnd - streamStart));
 
         System.out.println("\nUC13 performance benchmarking completed...");
+
+        // UC14 - Handle Invalid Bogie Capacity (Custom Exception)
+        System.out.println("\n========================================");
+        System.out.println(" UC14 - Handle Invalid Bogie Capacity ");
+        System.out.println("========================================\n");
+
+        // ---- Custom Exception ----
+        class InvalidCapacityException extends Exception {
+            public InvalidCapacityException(String message) {
+                super(message);
+            }
+        }
+
+        // ---- Passenger Bogie with Validation ----
+        class PassengerBogie {
+            String name;
+            int capacity;
+
+            public PassengerBogie(String name, int capacity) throws InvalidCapacityException {
+                if (capacity <= 0) {
+                    throw new InvalidCapacityException("Capacity must be greater than zero");
+                }
+                this.name = name;
+                this.capacity = capacity;
+            }
+        }
+
     }
 }
