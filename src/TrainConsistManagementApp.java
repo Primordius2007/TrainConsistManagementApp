@@ -305,6 +305,8 @@ public class TrainConsistManagementApp {
 
         System.out.println("\nUC11 validation completed...");
 
+        scanner.close();
+
         // UC12 - Safety Compliance Check for Goods Bogies
         System.out.println("\n========================================");
         System.out.println(" UC12 - Safety Compliance Check for Goods Bogies ");
@@ -334,6 +336,36 @@ public class TrainConsistManagementApp {
 
         System.out.println("\nUC12 safety validation completed...");
 
-        scanner.close();
+        // UC13 - Performance Comparison (Loops vs Streams)
+        System.out.println("\n========================================");
+        System.out.println(" UC13 - Performance Comparison (Loops vs Streams) ");
+        System.out.println("========================================\n");
+
+        List<Bogie> uc13Bogies = new ArrayList<>();
+        for (int i = 0; i < 100000; i++) {
+            uc13Bogies.add(new Bogie("Sleeper", 50 + (i % 50)));
+        }
+
+        // Loop-based filtering
+        long loopStart = System.nanoTime();
+        List<Bogie> loopResult = new ArrayList<>();
+        for (Bogie b : uc13Bogies) {
+            if (b.capacity > 60) {
+                loopResult.add(b);
+            }
+        }
+        long loopEnd = System.nanoTime();
+
+        // Stream-based filtering
+        long streamStart = System.nanoTime();
+        List<Bogie> streamResult = uc13Bogies.stream()
+                .filter(b -> b.capacity > 60)
+                .collect(Collectors.toList());
+        long streamEnd = System.nanoTime();
+
+        System.out.println("Loop Execution Time (ns): " + (loopEnd - loopStart));
+        System.out.println("Stream Execution Time (ns): " + (streamEnd - streamStart));
+
+        System.out.println("\nUC13 performance benchmarking completed...");
     }
 }
